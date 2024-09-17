@@ -1,37 +1,45 @@
-import random #nunca lo usamos por el momento por que si lo vamos a usar XD :D
+class Enemigo:
+    def crear_enemigo(nombre, ataque, vida):
+        return {"nombre": nombre, "ataque": ataque, "vida": vida}
 
-class hero:
-    def create_hero(name, attack=15, health=100):
-        print(
-            "Name: " + name,
-            "Attack: " + attack,
-            "Health: " + health
-        )
+class Batalla:
+    def iniciar_batalla(heroe, enemigos):
+        victorias = 0
+        for enemigo in enemigos:
+            print(f"Un {enemigo['nombre']} aparece")
+            while heroe["vida"] > 0 and enemigo["vida"] > 0:
+                enemigo["vida"] -= heroe["ataque"]
+                if enemigo["vida"] > 0:
+                    heroe["vida"] -= enemigo["ataque"]
+            if heroe["vida"] > 0:
+                victorias += 1
+                heroe["vida"] += 30 # Recuperamos 30 de vida
+                heroe["ataque"] += 5 # Aumentamos el ataque en 5
+                print(f"Has derrotado a {enemigo['nombre']} recuperas 30 de vida y aumentas tu ataque en 5")
+            else:
+                print(f"Has sido derrotado por el {enemigo['nombre']}")
+                break
+        if heroe["vida"] > 0:
+            print(f"Has ganado {victorias} batallas")
 
-        return hero
-
-class enemy:
-    def create_enemy(name, attack=10 , health=100):
-
-        enemy={
-            "Name": name,
-            "Attack": attack,
-            "Health": health
-        }
-
-        return enemy
-
-#class boss(enemy):  //es una opcion esto 
-
-
-class war:
-    def battle(hero,enemy):
-        return battle 
-
-    def lose_health():
-        if hero['health'] == 0 :
-            print("You lose")
-        return hero
+        else:
+            print(f"Has perdido la batalla con {victorias} victorias")
 
 
-hero = input("Create a hero") 
+# Creamos el heroe
+nombre_heroe = input("Ingrese el nombre del heroe: ")
+ataque_heroe = int(input("Ingrese el ataque del heroe: "))
+vida_heroe = int(input("Ingrese la vida del heroe: "))
+heroe = Heroe.crear_heroe(nombre_heroe, ataque_heroe, vida_heroe)
+
+# Creamos los enemigos¿
+enemigos = [
+    Enemigo.crear_enemigo("Goblin", 5, 30),
+    Enemigo.crear_enemigo("Orco", 10, 50),
+    Enemigo.crear_enemigo("Troll", 15, 80),
+    Enemigo.crear_enemigo("Ropaloulista", 25, 200),
+    Enemigo.crear_enemigo("Rey Demonio", 24, 250),
+]
+
+# Iniciamos la batalla
+Batalla.iniciar_batalla(heroe, enemigos)
