@@ -1,3 +1,13 @@
+import math
+
+class Heroe:
+    def crear_heroe(nombre, ataque, vida):
+        if ataque > 20:
+            raise ValueError("El ataque no puede ser mayor a 20")
+        if vida > 200:
+            raise ValueError("La vida no puede ser mayor a 200")
+        return {"nombre": nombre, "ataque": ataque, "vida": vida}
+
 class Enemigo:
     def crear_enemigo(nombre, ataque, vida):
         return {"nombre": nombre, "ataque": ataque, "vida": vida}
@@ -27,19 +37,35 @@ class Batalla:
 
 
 # Creamos el heroe
-nombre_heroe = input("Ingrese el nombre del heroe: ")
-ataque_heroe = int(input("Ingrese el ataque del heroe: "))
-vida_heroe = int(input("Ingrese la vida del heroe: "))
-heroe = Heroe.crear_heroe(nombre_heroe, ataque_heroe, vida_heroe)
+
+
+while True:
+    try:
+        nombre_heroe = input("Ingrese el nombre del heroe: ")
+        ataque_heroe = int(input("Ingrese el ataque del heroe: "))
+        vida_heroe = int(input("Ingrese la vida del heroe: "))
+        heroe = Heroe.crear_heroe(nombre_heroe, ataque_heroe, vida_heroe)   
+        break
+    except ValueError as e:
+        print(e)
+        
+          
+    
 
 # Creamos los enemigos¿
 enemigos = [
     Enemigo.crear_enemigo("Goblin", 5, 30),
     Enemigo.crear_enemigo("Orco", 10, 50),
     Enemigo.crear_enemigo("Troll", 15, 80),
+    Enemigo.crear_enemigo("Dragon", 20, 100),
     Enemigo.crear_enemigo("Ropaloulista", 25, 200),
     Enemigo.crear_enemigo("Rey Demonio", 24, 250),
 ]
 
 # Iniciamos la batalla
+#no me esta andando el math, lo arreglo en mi casa  
+#math.enemigos = enemigos[4,5] 1era opcion no anda
+#math.batalla= Batalla.iniciar_batalla(heroe, int(enemigos[4,5])) 2da opcion no anda
+#math.batalla= Batalla.iniciar_batalla(heroe, enemigos[4,5]) 3era opcion no anda
+
 Batalla.iniciar_batalla(heroe, enemigos)
